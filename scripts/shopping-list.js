@@ -1,4 +1,5 @@
 /* global store, API */
+'use strict';
 
 // eslint-disable-next-line no-unused-vars
 const shoppingList = (function() {
@@ -74,8 +75,12 @@ const shoppingList = (function() {
   function handleItemCheckClicked() {
     $('.js-shopping-list').on('click', '.js-item-toggle', event => {
       const id = getItemIdFromElement(event.currentTarget);
-      store.findAndToggleChecked(id);
-      render();
+      const item = store.findById(id);
+      const checkStatus = { checked: !item.checked };
+      API.updateItem(id, checkStatus, () => {
+        store.findAndUpdate(id, checkStatus);
+        render();
+      });
     });
   }
 
@@ -98,8 +103,12 @@ const shoppingList = (function() {
       const itemName = $(event.currentTarget)
         .find('.shopping-item')
         .val();
-      store.findAndUpdateName(id, itemName);
-      render();
+      const newName = { name: itemName };
+
+      API.updateItem(id, newName, () => {
+        store.findAndUpdate(id, newName);
+        render();
+      });
     });
   }
 
