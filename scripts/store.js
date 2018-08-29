@@ -28,15 +28,22 @@ const store = (function() {
     this.searchTerm = term;
   };
 
-  const errorCallback = function(error) {
-    console.error(error);
+  const setErrorMessage = function(errorMessage) {
+    this.errorMessage = errorMessage;
+  };
+
+  const setErrorOperation = function(errorOperation) {
+    this.errorOperation = errorOperation;
   };
 
   return {
     items: [],
     hideCheckedItems: false,
     searchTerm: '',
-
+    errorMessage: '',
+    errorOperation: '',
+    setErrorOperation,
+    setErrorMessage,
     addItem,
     findById,
     findAndDelete,

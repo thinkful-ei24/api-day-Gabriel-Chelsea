@@ -30,6 +30,7 @@ const API = (function() {
       method: 'PATCH',
       contentType: 'application/json',
       data: updatedItem,
+      success: callback,
       error: errorCallback
     });
   };
