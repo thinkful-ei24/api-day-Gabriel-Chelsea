@@ -28,6 +28,10 @@ const store = (function() {
     this.searchTerm = term;
   };
 
+  const errorCallback = function(error) {
+    console.error(error);
+  };
+
   return {
     items: [],
     hideCheckedItems: false,
